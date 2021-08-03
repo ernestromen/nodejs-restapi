@@ -23,8 +23,7 @@ let id = req.url.split('/')[3];
     }else if(req.url === '/api/products/' && req.method === 'POST'){
 
         createProduct(req,res);
-        console.log('post has passed');
-        res.end();
+        // console.log('post has passed');
 
     }else{
         res.writeHead(404, {'Content-Type': 'text/html'});

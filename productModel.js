@@ -21,7 +21,10 @@ function findById(id){
 
 function create(product){
 return new Promise((resolve,reject)=>{
+
+
 const newProduct = {id: v4(),...product};
+
 products.push(newProduct);
 writeDataToFile('./data/products.json',products);
 resolve(newProduct);
