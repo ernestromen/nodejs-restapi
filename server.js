@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const {getProducts, getProductById,createProduct} = require('./controllers1/productController');
+const {getProducts, getProductById,createProduct,updateProduct,deleteProduct} = require('./controllers1/productController');
 // const { getProducts } = require('./controllers1/productController1');
 
 const server =  http.createServer((req,res)=>{
@@ -12,7 +12,7 @@ const server =  http.createServer((req,res)=>{
         // res.statusCode = 200;
         // res.setHeader('Content-Type','text/html');
         // res.end(JSON.stringify(products));
-    }else if(req.url.match(/\/api\/products\/\d+/) && req.method === 'GET'){
+    }else if(req.url.match(/\/api\/products\/([0-9]+)|([a-z]+)|([A-Z]+)/) && req.method === 'GET'){
 let id = req.url.split('/')[3];
 
         ///cntroller goes here
@@ -25,6 +25,16 @@ let id = req.url.split('/')[3];
         createProduct(req,res);
         // console.log('post has passed');
 
+    }else if(req.url.match(/\/api\/products\/\d+/) && req.method === 'PUT'){
+        let id = req.url.split('/')[3];
+
+updateProduct(req,res,id);
+
+
+    }else if(req.url.match(/\/api\/products\/([0-9]+)|([a-z]+)|([A-Z]+)/) && req.method === 'DELETE'){
+        let id = req.url.split('/')[3];
+
+        deleteProduct(req,res,id);
     }else{
         res.writeHead(404, {'Content-Type': 'text/html'});
 
